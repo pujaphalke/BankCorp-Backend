@@ -1,10 +1,10 @@
 package com.bankcorp.enquiry.servicei;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bankcorp.enquiry.model.Enquiry;
 import com.bankcorp.enquiry.repository.EnquiryRepository;
 
@@ -17,6 +17,18 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	@Override
 	public Enquiry saveEnquiryData(Enquiry e) {
 		e.setEnquiryDate(new Date());
+	
 		return er.save(e);
+	}
+
+	@Override
+	public Enquiry getEnquiryById(Integer customerId) {
+		
+		return er.findById(customerId).get();
+	}
+	
+	@Override
+	public List<Enquiry> getAllEnquiries() {
+	    return er.findAll();
 	}
 }
