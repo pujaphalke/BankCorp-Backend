@@ -6,4 +6,6 @@ public interface EnquiryServiceI {
 
 	Enquiry saveEnquiryData(Enquiry e);
 
+	public void deleteEnquiryData(int customerId);
+
 }

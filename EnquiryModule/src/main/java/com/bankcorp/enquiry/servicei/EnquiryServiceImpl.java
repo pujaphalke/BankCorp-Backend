@@ -19,4 +19,12 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 		e.setEnquiryDate(new Date());
 		return er.save(e);
 	}
+
+	
+	@Override
+	public void deleteEnquiryData(int customerId) {
+		
+		er.deleteById(customerId);
+		
+	}
 }
