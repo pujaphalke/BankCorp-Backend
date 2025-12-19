@@ -6,4 +6,6 @@ public interface EnquiryServiceI {
 
 	Enquiry saveEnquiryData(Enquiry e);
 
+	Enquiry updateEnquiryData(int customerId, Enquiry enquiry);
+
 }
