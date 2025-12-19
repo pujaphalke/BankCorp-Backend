@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +20,24 @@ import com.bankcorp.enquiry.servicei.EnquiryServiceI;
 public class EnquiryController {
 
 	@Autowired
-	EnquiryServiceI esi;
+	EnquiryServiceI enquiryService;
 	
 	@PostMapping("/post")
-	public Enquiry saveEnquiryData(@RequestBody Enquiry e)
+	public ResponseEntity<Enquiry> saveEnquiryData(@RequestBody Enquiry enquiry)
+	{		
+		Enquiry enquiryData= enquiryService.saveEnquiryData(enquiry);
+		return new ResponseEntity<Enquiry>(enquiryData, HttpStatus.CREATED);  
+	}
+	
+	@PutMapping("/update/{customerId}")
+	public ResponseEntity<Enquiry> updateEnquiryData(@PathVariable("customerId") int customerId, @RequestBody Enquiry enquiry)
 	{
+	   Enquiry enquiryRef = enquiryService.updateEnquiryData(customerId , enquiry);
+	   return new ResponseEntity<Enquiry>(enquiryRef, HttpStatus.OK);
+
 		Enquiry enquiryData= esi.saveEnquiryData(e);
 		return enquiryData;
+
 	}
 	
 	@GetMapping("/getbyid/{customerId}")

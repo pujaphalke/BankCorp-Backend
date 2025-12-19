@@ -14,4 +14,6 @@ public interface EnquiryServiceI {
 
 	
 
+	Enquiry updateEnquiryData(int customerId, Enquiry enquiry);
+
 }
