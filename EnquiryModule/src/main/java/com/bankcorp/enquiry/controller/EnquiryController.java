@@ -33,7 +33,9 @@ public class EnquiryController {
 	@PostMapping("/post")
 	public ResponseEntity<Enquiry> saveEnquiryData(@RequestBody Enquiry enquiry)
 	{		
+		
 		Enquiry enquiryData= enquiryService.saveEnquiryData(enquiry);
+		
 		return new ResponseEntity<Enquiry>(enquiryData, HttpStatus.CREATED);  
 	}
 	
