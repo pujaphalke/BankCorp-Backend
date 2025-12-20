@@ -16,4 +16,6 @@ public interface EnquiryServiceI {
 
 	public Enquiry updateCibil(Integer customerId, Integer cibilscore);
 
+	public void deleteEnquiryData(int customerId);
+
 }

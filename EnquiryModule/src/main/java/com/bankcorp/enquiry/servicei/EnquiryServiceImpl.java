@@ -95,4 +95,10 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 		
 		return enquiryRepository.save(enquiry);
 	}
+
+	@Override
+	public void deleteEnquiryData(int customerId) {
+		
+		enquiryRepository.deleteById(customerId);
+	}
 }
