@@ -8,12 +8,16 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.bankcorp.enquiry.model.Cibil;
+import com.bankcorp.enquiry.model.EmailSend;
 import com.bankcorp.enquiry.model.Enquiry;
 import com.bankcorp.enquiry.repository.EnquiryRepository;
+
 
 @Service
 public class EnquiryServiceImpl implements EnquiryServiceI{
@@ -21,10 +25,27 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	@Autowired
 	EnquiryRepository enquiryRepository;
 	
+	@Autowired
+	JavaMailSender mailSenderUtility;
+	
+	
 
 	@Override
     public Enquiry saveEnquiryData(Enquiry enquiry) {
 		enquiry.setEnquiryDate(new Date());
+		
+		try {
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setTo(enquiry.getEmail());
+			mailMessage.setFrom("gonyalshubham0@gmail.com");
+			mailMessage.setSubject("Enquiry Submitted...");
+			mailMessage.setText("Enquiry Submitted");
+			mailSenderUtility.send(mailMessage);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		 
 		return enquiryRepository.save(enquiry);
 	}
 
@@ -92,6 +113,34 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 			cibil.setCibilRemark("Excellent");
 		}
 		enquiry.setCibil(cibil);
+		
+		//score remark status
+		if(cibil.getCibilStatus().equals("Approved"))
+		{
+			try {
+				SimpleMailMessage mailMessage = new SimpleMailMessage();
+				mailMessage.setTo(enquiry.getEmail());
+				mailMessage.setFrom("gonyalshubham0@gmail.com");
+				mailMessage.setSubject("Cibil Score Check");
+				mailMessage.setText("Cibil Score:"+cibil.getCibilScore()+" Cibil Status: "+cibil.getCibilStatus()+"Cibil Remark:"+cibil.getCibilRemark()+"Your Application is Approved.You are eligible for Home Loan ,prepare Your documents IncomeTax details,AadharCard,PanCard And Submit As Soon As Possible for further Process.");
+				mailSenderUtility.send(mailMessage);
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+		}else{ 
+			try {
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setTo(enquiry.getEmail());
+			mailMessage.setFrom("gonyalshubham0@gmail.com");
+			mailMessage.setSubject("Cibil Score Check");
+			mailMessage.setText("Cibil Score:"+cibil.getCibilScore()+" Cibil Status: "+cibil.getCibilStatus()+"Cibil Remark:"+cibil.getCibilRemark()+"Your Application is Rejected,Try After one MONTH .");
+			mailSenderUtility.send(mailMessage);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 		
 		return enquiryRepository.save(enquiry);
 	}
