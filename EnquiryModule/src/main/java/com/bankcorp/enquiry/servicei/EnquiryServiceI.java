@@ -12,8 +12,8 @@ public interface EnquiryServiceI {
 	
 	public List<Enquiry> getAllEnquiries();
 
-	
+	public Enquiry updateEnquiryData(int customerId, Enquiry enquiry);
 
-	Enquiry updateEnquiryData(int customerId, Enquiry enquiry);
+	public Enquiry updateCibil(Integer customerId, Integer cibilscore);
 
 }
