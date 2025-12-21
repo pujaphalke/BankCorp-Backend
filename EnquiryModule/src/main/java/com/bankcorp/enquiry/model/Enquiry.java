@@ -27,6 +27,7 @@ public class Enquiry {
 	private String firstName;
 	private String lastName;
 	private Integer age;
+	private String loanStatus;
 	private String email;
 	private Long mobileNo;
 	private String pancardNo;

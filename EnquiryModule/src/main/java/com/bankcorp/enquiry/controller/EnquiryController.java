@@ -79,6 +79,13 @@ public class EnquiryController {
 		enquiryService.deleteEnquiryData(customerId);
 		return new ResponseEntity<String>("Data is Deleted", HttpStatus.OK);
 	}
+	
+	@GetMapping("/fto/{customerId}")
+	public ResponseEntity<String> forwardToOe(@PathVariable("customerId") int customerId)
+	{
+	 enquiryService.forwardToOe(customerId);
+	 return new ResponseEntity<String>("Forward to OE successfully", HttpStatus.OK);
+	}
 
 
 
