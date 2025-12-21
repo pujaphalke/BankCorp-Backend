@@ -20,4 +20,6 @@ public interface EnquiryServiceI {
 	
 	public void forwardToOe( int customerId);
 
+	public Enquiry getByLoanStatus(String loanStatus);
+
 }
