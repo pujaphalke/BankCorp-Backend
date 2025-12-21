@@ -33,7 +33,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	@Override
     public Enquiry saveEnquiryData(Enquiry enquiry) {
 		enquiry.setEnquiryDate(new Date());
-		
+		enquiry.setLoanStatus("Pending");
 		try {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(enquiry.getEmail());
@@ -88,7 +88,11 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	{
 		Enquiry enquiry = enquiryRepository.findById(customerId).get();
 		
+		enquiry.setLoanStatus("Forward To Operational Executive");
+		
 		Cibil cibil = new Cibil();
+		
+		
 		cibil.setCibilScore(cibilscore);
 		cibil.setCibilScoreDate(new Date());
 		if(cibilscore>=300 && cibilscore<=579)
@@ -117,6 +121,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 		//score remark status
 		if(cibil.getCibilStatus().equals("Approved"))
 		{
+			enquiry.setLoanStatus("CibilApproved");
 			try {
 				SimpleMailMessage mailMessage = new SimpleMailMessage();
 				mailMessage.setTo(enquiry.getEmail());
@@ -130,6 +135,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 				}
 		}else{ 
 			try {
+				enquiry.setLoanStatus("CibilRejected");
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(enquiry.getEmail());
 			mailMessage.setFrom("gonyalshubham0@gmail.com");
@@ -149,5 +155,13 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	public void deleteEnquiryData(int customerId) {
 		
 		enquiryRepository.deleteById(customerId);
+	}
+
+	@Override
+	public void forwardToOe( int customerId) {
+	 Enquiry enquiry=	enquiryRepository.findById(customerId).get();
+	 enquiry.setLoanStatus("forwardToOE");
+	 enquiryRepository.save(enquiry);
+		
 	}
 }
