@@ -1,26 +1,21 @@
-package com.bankcorp.enquiry.model;
+package com.bankcorp.loanapplication.model;
 
 import java.util.Date;
 
-
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
-public class Enquiry {
-
+public class LoanApplication {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
@@ -35,7 +30,7 @@ public class Enquiry {
 	private String pancardNo;
 	private String loanStatus;
 	@Temporal(TemporalType.DATE)
-	private Date enquiryDate;
-	@OneToOne(cascade = CascadeType.ALL)
-	private Cibil cibil;
+	private Date applicationDate;
+	
+
 }

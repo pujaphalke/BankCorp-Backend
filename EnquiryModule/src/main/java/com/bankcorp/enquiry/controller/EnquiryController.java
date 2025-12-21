@@ -39,6 +39,23 @@ public class EnquiryController {
 		return new ResponseEntity<Enquiry>(enquiryData, HttpStatus.CREATED);  
 	}
 	
+	//Using RequestPart for post in enquiry 
+	
+	//	@PostMapping("/post")
+	//	public ResponseEntity<Enquiry> saveEnquiryData(@RequestPart("data") String data)
+	//	{	
+	//		ObjectMapper objectMapper = new ObjectMapper();
+	//		Enquiry enquiry = new Enquiry();
+	//		try {
+	//		enquiry = objectMapper.readValue(data, Enquiry.class);
+	//		enquiryService.saveEnquiryData(enquiry);
+	//		}
+	//		catch(Exception e) {
+	//		e.printStackTrace();  
+	//		}
+	//		return new ResponseEntity<Enquiry>(enquiry, HttpStatus.CREATED);
+	//	}
+	
 	@PutMapping("/update/{customerId}")
 	public ResponseEntity<Enquiry> updateEnquiryData(@PathVariable("customerId") int customerId,
 			                                         @RequestBody Enquiry enquiry)
@@ -86,6 +103,16 @@ public class EnquiryController {
 	 enquiryService.forwardToOe(customerId);
 	 return new ResponseEntity<String>("Forward to OE successfully", HttpStatus.OK);
 	}
+	
+	@GetMapping("/getByLoanStatus/{loanStatus}")
+	public ResponseEntity<Enquiry> getByLoanStatus(@PathVariable("loanStatus") String loanStatus){
+		
+		Enquiry enquiry= enquiryService.getByLoanStatus(loanStatus);
+        return new ResponseEntity<Enquiry>(enquiry, HttpStatus.OK);
+
+		
+	}
+	
 
 
 
