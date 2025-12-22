@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class LoanApplication {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	private String firstName;
 	private String lastName;

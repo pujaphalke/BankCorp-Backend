@@ -169,28 +169,28 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	}
 
 	@Override
-	public Enquiry getByLoanStatus(String loanStatus) {
-		if(loanStatus.equals("CibilApproved"))
-		{	
-			Enquiry enquiry = enquiryRepository.getByLoanStatus(loanStatus);
-			Enquiry enquiryRef = new Enquiry();
-			enquiryRef.setCustomerId(enquiry.getCustomerId());
-			enquiryRef.setFirstName(enquiry.getFirstName());
-			enquiryRef.setLastName(enquiry.getLastName());
-			enquiryRef.setEmail(enquiry.getEmail());
-			enquiryRef.setPancardNo(enquiry.getPancardNo());
-			enquiryRef.setMobileNo(enquiry.getMobileNo());
-			enquiryRef.setAge(enquiry.getAge());
-			enquiryRef.setCustomerGender(enquiry.getCustomerGender());
-			enquiryRef.setLoanTenure(enquiry.getLoanTenure());
-			enquiryRef.setLoanStatus(enquiry.getLoanStatus());
-			enquiryRef.setLoanRequired(enquiry.getLoanRequired());
+	public List<Enquiry> getByLoanStatus(String loanStatus) {
+		//if(loanStatus.equals("CibilApproved"))
+		//{	
+			List<Enquiry> enquirylist = enquiryRepository.getByLoanStatus(loanStatus);
+//			Enquiry enquiryRef = new Enquiry();
+//			enquiryRef.setCustomerId(enquiry.getCustomerId());
+//			enquiryRef.setFirstName(enquiry.getFirstName());
+//			enquiryRef.setLastName(enquiry.getLastName());
+//			enquiryRef.setEmail(enquiry.getEmail());
+//			enquiryRef.setPancardNo(enquiry.getPancardNo());
+//			enquiryRef.setMobileNo(enquiry.getMobileNo());
+//			enquiryRef.setAge(enquiry.getAge());
+//			enquiryRef.setCustomerGender(enquiry.getCustomerGender());
+//			enquiryRef.setLoanTenure(enquiry.getLoanTenure());
+//			enquiryRef.setLoanStatus(enquiry.getLoanStatus());
+//			enquiryRef.setLoanRequired(enquiry.getLoanRequired());
 			
-			return enquiryRepository.save(enquiryRef);
+			return (List<Enquiry>) enquirylist;
  
-		}
-		else {
-			return null;
-		}
+//		}
+//		else {
+//			return null;
+//		}
 	}
 }
