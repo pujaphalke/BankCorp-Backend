@@ -2,10 +2,12 @@ package com.bankcorp.loanapplication.model;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class LoanApplication {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	private String firstName;
 	private String lastName;
@@ -31,6 +33,8 @@ public class LoanApplication {
 	private String loanStatus;
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Documents documents;
 	
 
 }
