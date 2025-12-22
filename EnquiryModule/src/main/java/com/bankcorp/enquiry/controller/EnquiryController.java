@@ -105,10 +105,10 @@ public class EnquiryController {
 	}
 	
 	@GetMapping("/getByLoanStatus/{loanStatus}")
-	public ResponseEntity<Enquiry> getByLoanStatus(@PathVariable("loanStatus") String loanStatus){
+	public ResponseEntity<List<Enquiry>> getByLoanStatus(@PathVariable("loanStatus") String loanStatus){
 		
-		Enquiry enquiry= enquiryService.getByLoanStatus(loanStatus);
-        return new ResponseEntity<Enquiry>(enquiry, HttpStatus.OK);
+		List<Enquiry> enquiry= enquiryService.getByLoanStatus(loanStatus);
+        return new ResponseEntity<List<Enquiry>>(enquiry, HttpStatus.OK);
 
 		
 	}

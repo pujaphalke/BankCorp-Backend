@@ -1,6 +1,7 @@
 package com.bankcorp.loanapplication.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,19 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	public LoanApplication saveLoanApplicationData(LoanApplication loanApplication) {
 		
 		loanApplication.setApplicationDate(new Date());
+		loanApplication.setLoanStatus("Application Submitted");
 		return loanApplicationRepository.save(loanApplication);
+	}
+
+	@Override
+	public List<LoanApplication> getAllApprovedApplications() {
+		
+		return loanApplicationRepository.findAll();
+	}
+
+	@Override
+	public void deleteApplication(Integer customerId) {
+		loanApplicationRepository.deleteById(customerId);		
 	}
 
 }
