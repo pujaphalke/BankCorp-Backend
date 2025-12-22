@@ -35,6 +35,8 @@ public class LoanApplication {
 	private Date applicationDate;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Documents documents;
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerAddress customerAddress;
 	
 
 }

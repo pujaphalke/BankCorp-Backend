@@ -87,10 +87,10 @@ public class LoanApplicationController {
 				  @RequestPart("documentBankCheque") MultipartFile bankCheque,
 				  @RequestPart("documentSalarySlips") MultipartFile salarySlips){
 		
-
 		    loanApplicationService.saveLoanApplication(loanApplicationData,addressProof,panCard, incomeTax,photo,addharCard,signature,bankCheque,salarySlips);
-			
-
+		
 		    return new ResponseEntity<String>("Registration done Successfully", HttpStatus.CREATED);
 	}
+	
+	
 }

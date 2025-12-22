@@ -6,11 +6,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bankcorp.loanapplication.model.CustomerAddress;
 import com.bankcorp.loanapplication.model.Documents;
 import com.bankcorp.loanapplication.model.LoanApplication;
+import com.bankcorp.loanapplication.model.LocalAddress;
+import com.bankcorp.loanapplication.model.PermanentAddress;
 import com.bankcorp.loanapplication.repository.LoanApplicationRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,7 +24,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	@Autowired
 	LoanApplicationRepository loanApplicationRepository;
-
+    
+	@Autowired
+	JavaMailSender mailSenderUtility;
+	
 
 
 	@Override
@@ -67,10 +75,28 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 		        ObjectMapper objectMapper = new ObjectMapper();
 				Documents document = new Documents();
 				LoanApplication loanApplication = new LoanApplication();
-
+				CustomerAddress customerAddress = new CustomerAddress();
+				LocalAddress localAddress = new LocalAddress();
+				PermanentAddress permanentAddress = new PermanentAddress();
+                   
+				
+				
 				
 				try {
+				
 					loanApplication=objectMapper.readValue(loanApplicationData, LoanApplication.class);
+					//localAddress.setAreaName(loanApplication.setCustomerAddress(localAddress.getAreaName()));
+					
+					
+					
+					customerAddress.setLocalAddress(localAddress);;
+					customerAddress.setPermanentAddress(permanentAddress);
+					loanApplication.setCustomerAddress(customerAddress);
+					
+					
+					
+					
+					
 					document.setAddressProof(addressProof.getBytes());
 					document.setPanCard(panCard.getBytes());
 					document.setIncomeTax(incomeTax.getBytes());
@@ -82,7 +108,20 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 					loanApplication.setApplicationDate(new Date());
 					loanApplication.setLoanStatus("Submitted");
 					loanApplication.setDocuments(document);
+					
 					loanApplicationRepository.save(loanApplication);
+					
+					
+					
+					SimpleMailMessage mailMessage = new SimpleMailMessage();
+					mailMessage.setTo(loanApplication.getEmail());
+					mailMessage.setFrom("gonyalshubham0@gmail.com");
+					mailMessage.setSubject("Loan Application Submitted...");
+					mailMessage.setText("ThanqnYou, "
+							+ "Wait Util your next process we will inform you shortly"
+							+ "Thanks&Reagards"
+							+ "BankCorp Bank");
+					mailSenderUtility.send(mailMessage);
 				} catch(IOException e) {
 					e.printStackTrace();
 				}
