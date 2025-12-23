@@ -21,7 +21,7 @@ public class DependantInfo {
 	private Integer noOfFamilyMembers;
 	private Integer noOfChild;
 	private String maritalStatus;
-	private List<String> dependantMember;
+	private Integer dependantMember;
 	private double familyIncome;
 	
 }

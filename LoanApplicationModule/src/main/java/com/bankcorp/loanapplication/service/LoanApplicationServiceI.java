@@ -18,4 +18,10 @@ public interface LoanApplicationServiceI {
 	
 	public void saveLoanApplication(String loanApplication,MultipartFile addressProof,MultipartFile panCard,MultipartFile incomeTax,MultipartFile photo,MultipartFile addharCard,MultipartFile signature,MultipartFile bankCheque,MultipartFile salarySlips);
 
+	public List<LoanApplication> getByLoanStatus(String loanStatus);
+
+	public String updateLoanStatusById(Integer customerId,String loanStatus);
+	
+	
+
 }
