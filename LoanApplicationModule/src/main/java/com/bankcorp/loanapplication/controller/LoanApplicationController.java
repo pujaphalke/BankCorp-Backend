@@ -46,13 +46,13 @@ public class LoanApplicationController {
 
 	
     
-	@GetMapping("/getbyloanstatus/{loanStatus}")
-	public ResponseEntity<List<LoanApplication>> getByLoanStatus(@PathVariable("loanStatus") String loanStatus) 
-	{
-		System.out.println(enquiryUrl);
-		List<LoanApplication> loanApplicationRef=restTemplate.getForObject(enquiryUrl+"/"+loanStatus,List.class);
-		return new ResponseEntity<List<LoanApplication>>(loanApplicationRef,HttpStatus.CREATED);
-	}
+//	@GetMapping("/getbyloanstatus/{loanStatus}")
+//	public ResponseEntity<List<LoanApplication>> getByLoanStatus(@PathVariable("loanStatus") String loanStatus) 
+//	{
+//		System.out.println(enquiryUrl);
+//		List<LoanApplication> loanApplicationRef=restTemplate.getForObject(enquiryUrl+"/"+loanStatus,List.class);
+//		return new ResponseEntity<List<LoanApplication>>(loanApplicationRef,HttpStatus.CREATED);
+//	}
 	
 	@GetMapping("/getallloanapplication")
 	public ResponseEntity<List<LoanApplication>> getAllLoanApplications()
