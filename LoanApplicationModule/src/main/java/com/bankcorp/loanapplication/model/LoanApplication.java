@@ -42,5 +42,10 @@ public class LoanApplication {
 	@JoinColumn(name = "address_id")
 	private CustomerAddress customerAddress;
 	
-
+	@OneToOne(cascade = CascadeType.ALL)
+	private DependantInfo dependantInfo;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private AccountDetails accountDetails;
+	
 }
