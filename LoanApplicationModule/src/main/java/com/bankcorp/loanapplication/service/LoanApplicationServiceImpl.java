@@ -68,36 +68,19 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 
 	@Override
 	public void saveLoanApplication(String  loanApplicationData, MultipartFile addressProof, MultipartFile panCard,
-			MultipartFile incomeTax, MultipartFile photo, MultipartFile addharCard, MultipartFile signature,
-			MultipartFile bankCheque, MultipartFile salarySlips) {
-		
+			                        MultipartFile incomeTax, MultipartFile photo, MultipartFile addharCard,
+			                        MultipartFile signature, MultipartFile bankCheque, MultipartFile salarySlips)
+	{
 		
 		        ObjectMapper objectMapper = new ObjectMapper();
 				Documents document = new Documents();
 				LoanApplication loanApplication = new LoanApplication();
-				CustomerAddress customerAddress = new CustomerAddress();
-				LocalAddress localAddress = new LocalAddress();
-				PermanentAddress permanentAddress = new PermanentAddress();
-                   
+
+             try {
 				
-				
-				
-				try {
-				
-					loanApplication=objectMapper.readValue(loanApplicationData, LoanApplication.class);
-					//localAddress.setAreaName(loanApplication.setCustomerAddress(localAddress.getAreaName()));
+					loanApplication = objectMapper.readValue(loanApplicationData, LoanApplication.class);
 					
-					
-					
-					customerAddress.setLocalAddress(localAddress);;
-					customerAddress.setPermanentAddress(permanentAddress);
-					loanApplication.setCustomerAddress(customerAddress);
-					
-					
-					
-					
-					
-					document.setAddressProof(addressProof.getBytes());
+				    document.setAddressProof(addressProof.getBytes());
 					document.setPanCard(panCard.getBytes());
 					document.setIncomeTax(incomeTax.getBytes());
 					document.setAddharCard(addharCard.getBytes());
@@ -110,8 +93,6 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 					loanApplication.setDocuments(document);
 					
 					loanApplicationRepository.save(loanApplication);
-					
-					
 					
 					SimpleMailMessage mailMessage = new SimpleMailMessage();
 					mailMessage.setTo(loanApplication.getEmail());
@@ -128,9 +109,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 				catch(Exception e){
 					e.printStackTrace();
 				}
-		
+		}
+
 	}
 
-	
 
-}

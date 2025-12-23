@@ -28,8 +28,6 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	@Autowired
 	JavaMailSender mailSenderUtility;
 	
-	
-
 	@Override
     public Enquiry saveEnquiryData(Enquiry enquiry) {
 		enquiry.setEnquiryDate(new Date());
@@ -165,32 +163,11 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	 Enquiry enquiry=	enquiryRepository.findById(customerId).get();
 	 enquiry.setLoanStatus("forwardToOE");
 	 enquiryRepository.save(enquiry);
-		
 	}
 
 	@Override
 	public List<Enquiry> getByLoanStatus(String loanStatus) {
-		//if(loanStatus.equals("CibilApproved"))
-		//{	
-			List<Enquiry> enquirylist = enquiryRepository.getByLoanStatus(loanStatus);
-//			Enquiry enquiryRef = new Enquiry();
-//			enquiryRef.setCustomerId(enquiry.getCustomerId());
-//			enquiryRef.setFirstName(enquiry.getFirstName());
-//			enquiryRef.setLastName(enquiry.getLastName());
-//			enquiryRef.setEmail(enquiry.getEmail());
-//			enquiryRef.setPancardNo(enquiry.getPancardNo());
-//			enquiryRef.setMobileNo(enquiry.getMobileNo());
-//			enquiryRef.setAge(enquiry.getAge());
-//			enquiryRef.setCustomerGender(enquiry.getCustomerGender());
-//			enquiryRef.setLoanTenure(enquiry.getLoanTenure());
-//			enquiryRef.setLoanStatus(enquiry.getLoanStatus());
-//			enquiryRef.setLoanRequired(enquiry.getLoanRequired());
-			
-			return (List<Enquiry>) enquirylist;
- 
-//		}
-//		else {
-//			return null;
-//		}
-	}
+		List<Enquiry> enquirylist = enquiryRepository.getByLoanStatus(loanStatus);
+        return (List<Enquiry>) enquirylist;
+    }
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -33,9 +34,12 @@ public class LoanApplication {
 	private String loanStatus;
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Documents documents;
+	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
 	private CustomerAddress customerAddress;
 	
 
