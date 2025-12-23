@@ -48,4 +48,7 @@ public class LoanApplication {
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails accountDetails;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private GuarantorDetails guarantorDetails;
+	
 }

@@ -96,7 +96,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 					
 					SimpleMailMessage mailMessage = new SimpleMailMessage();
 					mailMessage.setTo(loanApplication.getEmail());
-					mailMessage.setFrom("gonyalshubham0@gmail.com");
+					mailMessage.setFrom("pujaphalke1997@gmail.com");
 					mailMessage.setSubject("Loan Application Submitted...");
 					mailMessage.setText("ThanqnYou, "
 							+ "Wait Util your next process we will inform you shortly"
@@ -110,6 +110,21 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 					e.printStackTrace();
 				}
 		}
+
+	@Override
+	public List<LoanApplication> getByLoanStatus(String loanStatus) {
+		
+		
+		return loanApplicationRepository.findByLoanStatus(loanStatus);
+	}
+
+	@Override
+	public String updateLoanStatusById(Integer customerId,String loanStatus) {
+	  	 loanApplicationRepository.updateLoanStatus(customerId, loanStatus);
+		
+		
+		return loanStatus;
+	}
 
 	}
 

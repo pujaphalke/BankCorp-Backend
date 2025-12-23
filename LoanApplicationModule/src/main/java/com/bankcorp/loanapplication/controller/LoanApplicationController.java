@@ -43,16 +43,37 @@ public class LoanApplicationController {
 	@Value("${enquiry.url}")
     private String enquiryUrl;
 	
-
+	@GetMapping("/docVerify/{customerId}")
+	public ResponseEntity<String> docVerify(@PathVariable Integer  customerId)
+	{
+	
+	
+	String lsv = restTemplate.getForObject("http://localhost:9092/docVerifiedByOe", String.class);
+	
+	
+		return  new ResponseEntity<String>(lsv,HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("/docReject/{customerId}")
+	public ResponseEntity<String> docReject(@PathVariable Integer customerId)
+	{
+		String lsr = restTemplate.getForObject("http://localhost:9092/docRejectedByOe", String.class);
+		
+		String status= loanApplicationService.updateLoanStatusById(customerId,lsr);
+		return  new ResponseEntity<String>(lsr,HttpStatus.OK);
+	}
+	
+	
 	
     
-//	@GetMapping("/getbyloanstatus/{loanStatus}")
-//	public ResponseEntity<List<LoanApplication>> getByLoanStatus(@PathVariable("loanStatus") String loanStatus) 
-//	{
-//		System.out.println(enquiryUrl);
-//		List<LoanApplication> loanApplicationRef=restTemplate.getForObject(enquiryUrl+"/"+loanStatus,List.class);
-//		return new ResponseEntity<List<LoanApplication>>(loanApplicationRef,HttpStatus.CREATED);
-//	}
+	@GetMapping("/getbyloanstatus/{loanStatus}")
+	public ResponseEntity<List<LoanApplication>> getByLoanStatus(@PathVariable("loanStatus") String loanStatus) 
+	{
+		System.out.println(enquiryUrl);
+		List<LoanApplication> loanApplicationRef=loanApplicationService.getByLoanStatus(loanStatus);
+		return new ResponseEntity<List<LoanApplication>>(loanApplicationRef,HttpStatus.CREATED);
+	}
 	
 	@GetMapping("/getallloanapplication")
 	public ResponseEntity<List<LoanApplication>> getAllLoanApplications()
