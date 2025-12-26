@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bankcorp.enquiry.model.Enquiry;
 import com.bankcorp.enquiry.servicei.EnquiryServiceI;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/enquiry")
