@@ -78,14 +78,14 @@ public class LoanApplicationController {
 	
 	@PostMapping(value = "/post",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> saveLoanApplication(@RequestPart("loanApplicationData") String loanApplicationData,
-			      @RequestPart("documentAddressProof") MultipartFile addressProof,
-			      @RequestPart("documentPanCard") MultipartFile panCard,
-			      @RequestPart("documentIncometax") MultipartFile incomeTax,
-				  @RequestPart("documentPhoto") MultipartFile photo,
-				  @RequestPart("documentAddharCard") MultipartFile addharCard,
-				  @RequestPart("documentSignature") MultipartFile signature,
-				  @RequestPart("documentBankCheque") MultipartFile bankCheque,
-				  @RequestPart("documentSalarySlips") MultipartFile salarySlips){
+			      @RequestPart("addressProof") MultipartFile addressProof,
+			      @RequestPart("panCard") MultipartFile panCard,
+			      @RequestPart("incomeTax") MultipartFile incomeTax,
+				  @RequestPart("photo") MultipartFile photo,
+				  @RequestPart("addharCard") MultipartFile addharCard,
+				  @RequestPart("signature") MultipartFile signature,
+				  @RequestPart("bankCheque") MultipartFile bankCheque,
+				  @RequestPart("salarySlips") MultipartFile salarySlips){
 		
 		    loanApplicationService.saveLoanApplication(loanApplicationData,addressProof,panCard, incomeTax,photo,addharCard,signature,bankCheque,salarySlips);
 		
