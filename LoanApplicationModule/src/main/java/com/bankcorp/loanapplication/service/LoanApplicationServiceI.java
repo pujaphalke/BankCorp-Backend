@@ -21,6 +21,8 @@ public interface LoanApplicationServiceI {
 	public List<LoanApplication> getByLoanStatus(String loanStatus);
 
 	public String updateLoanStatusById(Integer customerId,String loanStatus);
+
+	public LoanApplication getById(Integer customerId);
 	
 	
 
