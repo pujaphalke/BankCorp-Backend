@@ -126,6 +126,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 		return loanStatus;
 	}
 
+	@Override
+	public LoanApplication getById(Integer customerId) {
+	
+		return  loanApplicationRepository.findById(customerId).get();
+	}
+
 	}
 
 

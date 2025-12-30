@@ -114,5 +114,11 @@ public class LoanApplicationController {
 		    return new ResponseEntity<String>("Registration done Successfully", HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/getbyId/{customerId}")
+	public ResponseEntity<LoanApplication> getById(@PathVariable("customerId")Integer customerId )
+	{
+		LoanApplication loanApplication = loanApplicationService.getById(customerId); 
+		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
+	}
 	
 }
