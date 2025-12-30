@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bankcorp.loanapplication.model.Documents;
 import com.bankcorp.loanapplication.model.LoanApplication;
+import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.service.LoanApplicationServiceI;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -119,6 +120,16 @@ public class LoanApplicationController {
 	{
 		LoanApplication loanApplication = loanApplicationService.getById(customerId); 
 		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/updateSanctionData/{customerId}")
+	public  ResponseEntity<String> updateSanctionData(@PathVariable("customerId")Integer customerId)
+	{
+		 Sanction sanctionData = restTemplate.getForObject("http://localhost:9094/sanction/get/"+customerId, Sanction.class);
+		 System.out.println(sanctionData.getFirstName());
+		 LoanApplication loanApplication = loanApplicationService.updateSanctionData(customerId,sanctionData);
+		return new ResponseEntity<String>("Sanctioned", HttpStatus.OK);
 	}
 	
 }

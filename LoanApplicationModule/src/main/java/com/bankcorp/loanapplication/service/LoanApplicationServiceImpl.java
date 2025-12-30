@@ -16,6 +16,7 @@ import com.bankcorp.loanapplication.model.Documents;
 import com.bankcorp.loanapplication.model.LoanApplication;
 import com.bankcorp.loanapplication.model.LocalAddress;
 import com.bankcorp.loanapplication.model.PermanentAddress;
+import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.repository.LoanApplicationRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -130,6 +131,25 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	public LoanApplication getById(Integer customerId) {
 	
 		return  loanApplicationRepository.findById(customerId).get();
+	}
+
+	@Override
+	public LoanApplication updateSanctionData(Integer customerId, Sanction sanctionData) {
+		
+		LoanApplication loanApplication = loanApplicationRepository.findById(customerId).get();
+		Sanction sanctionRef = new Sanction();
+		sanctionRef.setFirstName(loanApplication.getFirstName());
+		sanctionRef.setLastName(loanApplication.getLastName());
+		sanctionRef.setMobileNo(loanApplication.getMobileNo());
+		sanctionRef.setLoanAmountSanctioned(sanctionData.getLoanAmountSanctioned());
+		sanctionRef.setLoanTenure(sanctionData.getLoanTenure());
+		sanctionRef.setMonthlyEmiAmount(sanctionData.getMonthlyEmiAmount());
+		sanctionRef.setRateOfInterest(sanctionData.getRateOfInterest());
+		sanctionRef.setTermsCondition(sanctionData.getTermsCondition());
+		loanApplication.setLoanStatus("SanctionGenerated");
+		loanApplication.setSanction(sanctionRef);
+		return loanApplicationRepository.save(loanApplication);
+		
 	}
 
 	}

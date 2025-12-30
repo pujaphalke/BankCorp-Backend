@@ -51,4 +51,7 @@ public class LoanApplication {
 	@OneToOne(cascade = CascadeType.ALL)
 	private GuarantorDetails guarantorDetails;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Sanction sanction;
+	
 }

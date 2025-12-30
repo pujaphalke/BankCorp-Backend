@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bankcorp.loanapplication.model.LoanApplication;
+import com.bankcorp.loanapplication.model.Sanction;
 
 public interface LoanApplicationServiceI {
 
@@ -23,6 +24,8 @@ public interface LoanApplicationServiceI {
 	public String updateLoanStatusById(Integer customerId,String loanStatus);
 
 	public LoanApplication getById(Integer customerId);
+
+	public LoanApplication updateSanctionData(Integer customerId, Sanction sanctionData);
 	
 	
 

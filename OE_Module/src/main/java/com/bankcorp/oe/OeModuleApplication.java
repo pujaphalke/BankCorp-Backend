@@ -5,14 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-
-
 @SpringBootApplication
-public class OeModuleApplication {
+public class OeModuleApplication 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		SpringApplication.run(OeModuleApplication.class, args);
-		
 		
 	}
 	
