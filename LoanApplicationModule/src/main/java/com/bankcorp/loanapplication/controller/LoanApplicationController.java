@@ -50,7 +50,7 @@ public class LoanApplicationController {
 	
 	
 	String lsv = restTemplate.getForObject("http://localhost:9092/docVerifiedByOe", String.class);
-	
+	String status= loanApplicationService.updateLoanStatusById(customerId,lsv);
 	
 		return  new ResponseEntity<String>(lsv,HttpStatus.OK);
 		
