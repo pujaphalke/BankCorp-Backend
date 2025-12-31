@@ -36,7 +36,7 @@ public class SanctionServiceImpl implements SanctionServiceI {
 
 	@Override
 	public Sanction getSanctionDataById(Integer sanctionId) {
-		
+		System.out.println("");
 		return sanctionRepository.findById(sanctionId).get();
 	}
 

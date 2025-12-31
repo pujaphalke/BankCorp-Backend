@@ -136,11 +136,14 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	@Override
 	public LoanApplication updateSanctionData(Integer customerId, Sanction sanctionData) {
 		
+		
 		LoanApplication loanApplication = loanApplicationRepository.findById(customerId).get();
 		Sanction sanctionRef = new Sanction();
 		sanctionRef.setFirstName(loanApplication.getFirstName());
 		sanctionRef.setLastName(loanApplication.getLastName());
 		sanctionRef.setMobileNo(loanApplication.getMobileNo());
+		sanctionRef.setLoanStatus(sanctionData.getLoanStatus());
+		sanctionRef.setSanctionDate(sanctionData.getSanctionDate());
 		sanctionRef.setLoanAmountSanctioned(sanctionData.getLoanAmountSanctioned());
 		sanctionRef.setLoanTenure(sanctionData.getLoanTenure());
 		sanctionRef.setMonthlyEmiAmount(sanctionData.getMonthlyEmiAmount());

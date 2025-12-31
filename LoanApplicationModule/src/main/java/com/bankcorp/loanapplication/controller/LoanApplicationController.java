@@ -118,6 +118,7 @@ public class LoanApplicationController {
 	@GetMapping("/getbyId/{customerId}")
 	public ResponseEntity<LoanApplication> getById(@PathVariable("customerId")Integer customerId )
 	{
+		System.out.println("");
 		LoanApplication loanApplication = loanApplicationService.getById(customerId); 
 		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
 	}

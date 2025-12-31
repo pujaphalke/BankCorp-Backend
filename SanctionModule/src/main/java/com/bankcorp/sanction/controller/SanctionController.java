@@ -34,6 +34,7 @@ public class SanctionController {
 	@GetMapping("/get/{sanctionId}")
 	public ResponseEntity<Sanction> getSanctionDataById(@PathVariable("sanctionId") Integer sanctionId)
 	{
+		System.out.println("");
 		Sanction sanction = sanctionService.getSanctionDataById(sanctionId);
 		return new ResponseEntity<Sanction>(sanction,HttpStatus.OK);
 	}
