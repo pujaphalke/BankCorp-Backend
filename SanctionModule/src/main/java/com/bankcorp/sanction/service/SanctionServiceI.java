@@ -4,7 +4,7 @@ import com.bankcorp.sanction.model.Sanction;
 
 public interface SanctionServiceI {
 
-	public void saveSanctionData(Sanction sanction);
+	public Sanction saveSanctionData(Sanction sanction);
 
 	public Sanction getSanctionDataById(Integer sanctionId);
 

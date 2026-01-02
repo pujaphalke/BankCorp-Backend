@@ -18,17 +18,17 @@ public class SanctionServiceImpl implements SanctionServiceI {
 	SanctionRepository sanctionRepository;
 	
 	@Override
-	public void saveSanctionData(Sanction sanction) {
+	public Sanction saveSanctionData(Sanction sanction) {
 		
 		
  		
 	    sanction.setSanctionDate(new Date());
 	     sanction.setLoanStatus("SanctionGenerated");
-	     sanction.setTermsCondition("Terms & Condition");
+	     sanction.setTermsCondition("Standard");
 	      
 	      
 	      
-	      sanctionRepository.save(sanction);
+	    return  sanctionRepository.save(sanction);
          
 		
 		
