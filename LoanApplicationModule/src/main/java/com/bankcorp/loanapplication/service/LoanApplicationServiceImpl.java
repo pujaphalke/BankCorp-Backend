@@ -11,18 +11,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bankcorp.loanapplication.model.CustomerAddress;
 import com.bankcorp.loanapplication.model.Documents;
 import com.bankcorp.loanapplication.model.LoanApplication;
-import com.bankcorp.loanapplication.model.LocalAddress;
-import com.bankcorp.loanapplication.model.PermanentAddress;
+import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.repository.LoanApplicationRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
+
 	@Autowired
 	LoanApplicationRepository loanApplicationRepository;
     
@@ -134,27 +132,14 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	}
 
 	@Override
-	public LoanApplication updateSanctionData(Integer customerId, Sanction sanctionData) {
-		
-		
+	public LoanApplication updateSanctionData(Integer customerId, Sanction sanctionData)
+	{
 		LoanApplication loanApplication = loanApplicationRepository.findById(customerId).get();
-		Sanction sanctionRef = new Sanction();
-		sanctionRef.setFirstName(loanApplication.getFirstName());
-		sanctionRef.setLastName(loanApplication.getLastName());
-		sanctionRef.setMobileNo(loanApplication.getMobileNo());
-		sanctionRef.setLoanStatus(sanctionData.getLoanStatus());
-		sanctionRef.setSanctionDate(sanctionData.getSanctionDate());
-		sanctionRef.setLoanAmountSanctioned(sanctionData.getLoanAmountSanctioned());
-		sanctionRef.setLoanTenure(sanctionData.getLoanTenure());
-		sanctionRef.setMonthlyEmiAmount(sanctionData.getMonthlyEmiAmount());
-		sanctionRef.setRateOfInterest(sanctionData.getRateOfInterest());
-		sanctionRef.setTermsCondition(sanctionData.getTermsCondition());
-		loanApplication.setLoanStatus("SanctionGenerated");
-		loanApplication.setSanction(sanctionRef);
-		return loanApplicationRepository.save(loanApplication);
+	
+		loanApplication.setSanction(sanctionData);
 		
+		loanApplication.setLoanStatus("SanctionGenerated");
+		return loanApplicationRepository.save(loanApplication);
 	}
 
-	}
-
-
+}

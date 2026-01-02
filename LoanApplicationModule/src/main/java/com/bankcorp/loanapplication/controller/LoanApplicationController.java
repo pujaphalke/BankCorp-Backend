@@ -124,13 +124,14 @@ public class LoanApplicationController {
 	}
 	
 	
-	@GetMapping("/updateSanctionData/{customerId}")
-	public  ResponseEntity<String> updateSanctionData(@PathVariable("customerId")Integer customerId)
+	@PutMapping("/updateSanctionData/{customerId}")
+	public  ResponseEntity<LoanApplication> updateSanctionData(@PathVariable("customerId")Integer customerId,
+			                                                                    @RequestBody Sanction sanction)
 	{
-		 Sanction sanctionData = restTemplate.getForObject("http://localhost:9094/sanction/get/"+customerId, Sanction.class);
-		 System.out.println(sanctionData.getFirstName());
-		 LoanApplication loanApplication = loanApplicationService.updateSanctionData(customerId,sanctionData);
-		return new ResponseEntity<String>("Sanctioned", HttpStatus.OK);
+		 Sanction savedSanction = restTemplate.postForObject("http://localhost:9094/sanction/save",sanction, Sanction.class);
+		 System.out.println(savedSanction.getSanctionId());
+		 LoanApplication loanApplication = loanApplicationService.updateSanctionData(customerId,savedSanction);
+		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
 	}
 	
 }

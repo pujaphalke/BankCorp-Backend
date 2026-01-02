@@ -52,6 +52,7 @@ public class LoanApplication {
 	private GuarantorDetails guarantorDetails;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sanction_id")
 	private Sanction sanction;
 	
 }
