@@ -1,4 +1,4 @@
-package com.bankcorp.loanapplication.model;
+package com.bankcorp.customer.model;
 
 import java.util.Date;
 

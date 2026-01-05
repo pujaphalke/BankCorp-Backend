@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,25 +29,33 @@ public class SanctionController {
 	@Autowired
 	SanctionServiceI sanctionService;
 	
-	@PostMapping(
-		    value = "/save",
+	@PostMapping(value = "/save",
 		    consumes = MediaType.APPLICATION_JSON_VALUE,
-		    produces = MediaType.APPLICATION_JSON_VALUE
-		)
+		    produces = MediaType.APPLICATION_JSON_VALUE)
 	public  ResponseEntity<Sanction> saveSanctionData(@RequestBody Sanction sanction )
 	{ 
-		
 		Sanction sanctionRef = sanctionService.saveSanctionData(sanction);
-		
 		return new ResponseEntity<Sanction>(sanctionRef,HttpStatus.CREATED) ;
-		
 	}
 	
 	@GetMapping("/get/{sanctionId}")
 	public ResponseEntity<Sanction> getSanctionDataById(@PathVariable("sanctionId") Integer sanctionId)
 	{
-		System.out.println("");
 		Sanction sanction = sanctionService.getSanctionDataById(sanctionId);
+		return new ResponseEntity<Sanction>(sanction,HttpStatus.OK);
+	}
+	
+	@GetMapping("/acceptsanction/{sanctionId}")
+	public ResponseEntity<Sanction> acceptSanctionLetter(@PathVariable("sanctionId") Integer sanctionId)
+	{
+		Sanction sanction = sanctionService.acceptLoanStatus(sanctionId);
+		return new ResponseEntity<Sanction>(sanction,HttpStatus.OK);
+	}
+	
+	@GetMapping("/rejectsanction/{sanctionId}")
+	public ResponseEntity<Sanction> rejectSanctionLetter(@PathVariable("sanctionId") Integer sanctionId)
+	{
+		Sanction sanction = sanctionService.rejectLoanStatus(sanctionId);
 		return new ResponseEntity<Sanction>(sanction,HttpStatus.OK);
 	}
 

@@ -34,8 +34,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/application")
-public class LoanApplicationController {
-	
+public class LoanApplicationController 
+{
 	@Autowired
 	LoanApplicationServiceI loanApplicationService;
 	
@@ -48,27 +48,19 @@ public class LoanApplicationController {
 	@GetMapping("/docVerify/{customerId}")
 	public ResponseEntity<String> docVerify(@PathVariable Integer  customerId)
 	{
-	
-	
-	String lsv = restTemplate.getForObject("http://localhost:9092/docVerifiedByOe", String.class);
-	String status= loanApplicationService.updateLoanStatusById(customerId,lsv);
-	
+		String lsv = restTemplate.getForObject("http://localhost:9092/docVerifiedByOe", String.class);
+		String status= loanApplicationService.updateLoanStatusById(customerId,lsv);
 		return  new ResponseEntity<String>(lsv,HttpStatus.OK);
-		
 	}
 	
 	@GetMapping("/docReject/{customerId}")
 	public ResponseEntity<String> docReject(@PathVariable Integer customerId)
 	{
 		String lsr = restTemplate.getForObject("http://localhost:9092/docRejectedByOe", String.class);
-		
 		String status= loanApplicationService.updateLoanStatusById(customerId,lsr);
 		return  new ResponseEntity<String>(lsr,HttpStatus.OK);
 	}
 	
-	
-	
-    
 	@GetMapping("/getbyloanstatus/{loanStatus}")
 	public ResponseEntity<List<LoanApplication>> getByLoanStatus(@PathVariable("loanStatus") String loanStatus) 
 	{
@@ -108,17 +100,15 @@ public class LoanApplicationController {
 				  @RequestPart("addharCard") MultipartFile addharCard,
 				  @RequestPart("signature") MultipartFile signature,
 				  @RequestPart("bankCheque") MultipartFile bankCheque,
-				  @RequestPart("salarySlips") MultipartFile salarySlips){
-		
-		    loanApplicationService.saveLoanApplication(loanApplicationData,addressProof,panCard, incomeTax,photo,addharCard,signature,bankCheque,salarySlips);
-		
-		    return new ResponseEntity<String>("Registration done Successfully", HttpStatus.CREATED);
+				  @RequestPart("salarySlips") MultipartFile salarySlips)
+	{
+		loanApplicationService.saveLoanApplication(loanApplicationData,addressProof,panCard, incomeTax,photo,addharCard,signature,bankCheque,salarySlips);
+		return new ResponseEntity<String>("Registration done Successfully", HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/getbyId/{customerId}")
 	public ResponseEntity<LoanApplication> getById(@PathVariable("customerId")Integer customerId )
 	{
-		System.out.println("");
 		LoanApplication loanApplication = loanApplicationService.getById(customerId); 
 		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
 	}
@@ -129,9 +119,8 @@ public class LoanApplicationController {
 			                                                                    @RequestBody Sanction sanction)
 	{
 		 Sanction savedSanction = restTemplate.postForObject("http://localhost:9094/sanction/save",sanction, Sanction.class);
-		 System.out.println(savedSanction.getSanctionId());
 		 LoanApplication loanApplication = loanApplicationService.updateSanctionData(customerId,savedSanction);
-		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
+		 return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
 	}
 	
 }
