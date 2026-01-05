@@ -136,7 +136,16 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	{
 		LoanApplication loanApplication = loanApplicationRepository.findById(customerId).get();
 	
-		loanApplication.setSanction(sanctionData);
+		  double p = sanctionData.getLoanAmountSanctioned();
+		  double annualRate = sanctionData.getRateOfInterest();
+		  int n = sanctionData.getLoanTenure();
+		  double r = annualRate/(12*100);
+		  
+		  double emi = (p * r * Math.pow(1+r, n) )/
+				       (Math.pow(1+r, n));
+		  sanctionData.setMonthlyEmiAmount(emi);
+		  
+		  loanApplication.setSanction(sanctionData);
 		
 		loanApplication.setLoanStatus("SanctionGenerated");
 		return loanApplicationRepository.save(loanApplication);
