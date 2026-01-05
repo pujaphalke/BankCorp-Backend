@@ -6,7 +6,7 @@ import com.bankcorp.disbursement.model.LoanDisbursement;
 
 public interface LoanDisbursementServiceI {
 
-	public void saveDisbursementData(LoanDisbursement loanDisbursement);
+	public LoanDisbursement saveDisbursementData(LoanDisbursement loanDisbursement);
 
 	public LoanDisbursement getLoanDisbursementDataById(Integer agreementId);
 

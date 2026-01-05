@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bankcorp.loanapplication.model.Documents;
 import com.bankcorp.loanapplication.model.LoanApplication;
+import com.bankcorp.loanapplication.model.LoanDisbursement;
 import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.service.LoanApplicationServiceI;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -122,5 +123,17 @@ public class LoanApplicationController
 		 LoanApplication loanApplication = loanApplicationService.updateSanctionData(customerId,savedSanction);
 		 return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
 	}
+	
+	
+	
+	@PutMapping("/updateDisbursementData/{customerId}")
+	public ResponseEntity<LoanApplication> updateDisbursementData(@PathVariable("customerId")Integer customerId, @RequestBody LoanDisbursement loanDisbursement)
+	{
+		LoanDisbursement loanDisbursementRef=restTemplate.postForObject("http://localhost:9096/disbursement/save",loanDisbursement, LoanDisbursement.class);
+		LoanApplication loanApplication = loanApplicationService.updateDisbursementData(customerId,loanDisbursementRef);
+		return new ResponseEntity<LoanApplication>(loanApplication, HttpStatus.OK);
+																
+		
+	} 
 	
 }

@@ -16,10 +16,11 @@ public class LoanDisbursementServiceImpl implements LoanDisbursementServiceI{
 	LoanDisbursementRepository loanDisbursementRepository;
 	
 	@Override
-	public void saveDisbursementData(LoanDisbursement loanDisbursement) {
+	public LoanDisbursement saveDisbursementData(LoanDisbursement loanDisbursement) {
 		
 		loanDisbursement.setAgreementDate(new Date());
-		loanDisbursementRepository.save(loanDisbursement);	
+			
+		return loanDisbursementRepository.save(loanDisbursement);
 	}
 
 	@Override

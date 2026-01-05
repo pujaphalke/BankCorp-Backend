@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bankcorp.loanapplication.model.Documents;
 import com.bankcorp.loanapplication.model.LoanApplication;
+import com.bankcorp.loanapplication.model.LoanDisbursement;
 import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.model.Sanction;
 import com.bankcorp.loanapplication.repository.LoanApplicationRepository;
@@ -148,6 +149,18 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 		  loanApplication.setSanction(sanctionData);
 		
 		loanApplication.setLoanStatus("SanctionGenerated");
+		return loanApplicationRepository.save(loanApplication);
+	}
+
+	@Override
+	public LoanApplication updateDisbursementData(Integer customerId, LoanDisbursement loanDisbursementRef) {
+		
+		LoanApplication loanApplication=loanApplicationRepository.findById(customerId).get();
+		loanDisbursementRef.setTotalAmount(loanApplication.getSanction().getLoanAmountSanctioned());
+		loanApplication.setLoanDisbursement(loanDisbursementRef);
+		
+		loanApplication.setLoanStatus("Disbursed");
+		
 		return loanApplicationRepository.save(loanApplication);
 	}
 
