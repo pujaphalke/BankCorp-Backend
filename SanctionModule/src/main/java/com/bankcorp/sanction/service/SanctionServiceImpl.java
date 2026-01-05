@@ -1,6 +1,7 @@
 package com.bankcorp.sanction.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,18 @@ public class SanctionServiceImpl implements SanctionServiceI
 		Sanction sanctionRef = sanctionRepository.findById(sanctionId).get();
 		sanctionRef.setLoanStatus("SanctionRejected");
 		return sanctionRepository.save(sanctionRef);
+	}
+
+	@Override
+	public List<Sanction> getAllSanctioned() {
+		
+		return sanctionRepository.findAll();
+	}
+
+	@Override
+	public List<Sanction> getSanctionedbyLoanStatus(String loanStatus) {
+		
+		return sanctionRepository.getByLoanStatus(loanStatus);
 	}
 
 }
