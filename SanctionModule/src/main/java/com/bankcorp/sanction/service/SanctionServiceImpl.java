@@ -12,32 +12,40 @@ import com.bankcorp.sanction.repository.SanctionRepository;
 import tools.jackson.databind.ObjectMapper;
 
 @Service
-public class SanctionServiceImpl implements SanctionServiceI {
-
+public class SanctionServiceImpl implements SanctionServiceI 
+{
 	@Autowired
 	SanctionRepository sanctionRepository;
 	
 	@Override
-	public Sanction saveSanctionData(Sanction sanction) {
-		
-		
- 		
-	    sanction.setSanctionDate(new Date());
-	     sanction.setLoanStatus("SanctionGenerated");
-	     sanction.setTermsCondition("Standard");
-	      
-	      
-	      
+	public Sanction saveSanctionData(Sanction sanction) 
+	{
+		sanction.setSanctionDate(new Date());
+	    sanction.setLoanStatus("SanctionGenerated");
+	    sanction.setTermsCondition("Standard");
 	    return  sanctionRepository.save(sanction);
-         
-		
-		
+    }
+
+	@Override
+	public Sanction getSanctionDataById(Integer sanctionId) 
+	{
+		return sanctionRepository.findById(sanctionId).get();
 	}
 
 	@Override
-	public Sanction getSanctionDataById(Integer sanctionId) {
-		System.out.println("");
-		return sanctionRepository.findById(sanctionId).get();
+	public Sanction acceptLoanStatus(Integer sanctionId) 
+	{
+		Sanction sanctionRef = sanctionRepository.findById(sanctionId).get();
+		sanctionRef.setLoanStatus("SanctionAccepted");
+		return sanctionRepository.save(sanctionRef);
+	}
+
+	@Override
+	public Sanction rejectLoanStatus(Integer sanctionId) 
+	{
+		Sanction sanctionRef = sanctionRepository.findById(sanctionId).get();
+		sanctionRef.setLoanStatus("SanctionRejected");
+		return sanctionRepository.save(sanctionRef);
 	}
 
 }
