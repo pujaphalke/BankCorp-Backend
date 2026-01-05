@@ -2,6 +2,8 @@ package com.bankcorp.sanction.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,7 +40,7 @@ public class SanctionController {
 		return new ResponseEntity<Sanction>(sanctionRef,HttpStatus.CREATED) ;
 	}
 	
-	@GetMapping("/get/{sanctionId}")
+	@GetMapping("/getbyId/{sanctionId}")
 	public ResponseEntity<Sanction> getSanctionDataById(@PathVariable("sanctionId") Integer sanctionId)
 	{
 		Sanction sanction = sanctionService.getSanctionDataById(sanctionId);
@@ -57,6 +59,13 @@ public class SanctionController {
 	{
 		Sanction sanction = sanctionService.rejectLoanStatus(sanctionId);
 		return new ResponseEntity<Sanction>(sanction,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getbyLoanStatus/{loanStatus}")
+	public ResponseEntity<List<Sanction>> getAllSanctioned(@PathVariable("loanStatus")String loanStatus)
+	{
+		List<Sanction> list = sanctionService.getSanctionedbyLoanStatus(loanStatus);
+		return new ResponseEntity<List<Sanction>>(list, HttpStatus.OK);
 	}
 
 }
