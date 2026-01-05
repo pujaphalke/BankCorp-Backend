@@ -55,4 +55,7 @@ public class LoanApplication {
 	@JoinColumn(name = "sanction_id")
 	private Sanction sanction;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoanDisbursement loanDisbursement;
+	
 }
