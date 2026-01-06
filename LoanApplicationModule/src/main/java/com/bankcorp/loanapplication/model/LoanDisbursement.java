@@ -24,12 +24,13 @@ public class LoanDisbursement {
 	@Temporal(TemporalType.DATE)
 	private Date agreementDate;
 	private String amountPayType;
-	private Double totalAmount; 
+	private Double loanAmountSanctioned; 
 	private String bankName;
 	private Long accountNumber;
 	private String IFSCCode;
 	private String accountType;
 	private Double transferAmount;
 	private String paymentStatus;
+	private Double remainingAmount;
 	
 }

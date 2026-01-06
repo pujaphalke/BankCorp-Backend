@@ -30,7 +30,7 @@ public class CustomerController
 	public ResponseEntity<Sanction> getSanctionData(@PathVariable("customerId") Integer customerId)
 	{
 		LoanApplication loanApplicationRef = restTemplate.getForObject("http://localhost:9093/application/getbyId/"+customerId, LoanApplication.class);
-		Sanction sanctionRef = restTemplate.getForObject("http://localhost:9094/sanction/get/"+loanApplicationRef.getSanction().getSanctionId(), Sanction.class);
+		Sanction sanctionRef = restTemplate.getForObject("http://localhost:9094/sanction/getbyId/"+loanApplicationRef.getSanction().getSanctionId(), Sanction.class);
 		return new ResponseEntity<Sanction>(sanctionRef,HttpStatus.OK);
 	}
 	
