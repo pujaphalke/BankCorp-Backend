@@ -129,6 +129,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	@Override
 	public LoanApplication getById(Integer customerId) {
 	
+		
 		return  loanApplicationRepository.findById(customerId).get();
 	}
 
@@ -156,7 +157,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationServiceI{
 	public LoanApplication updateDisbursementData(Integer customerId, LoanDisbursement loanDisbursementRef) {
 		
 		LoanApplication loanApplication=loanApplicationRepository.findById(customerId).get();
-		loanDisbursementRef.setTotalAmount(loanApplication.getSanction().getLoanAmountSanctioned());
+		
+		loanDisbursementRef.setLoanAmountSanctioned(loanApplication.getSanction().getLoanAmountSanctioned());
+		
+		Double totalAmount = loanDisbursementRef.getLoanAmountSanctioned();
+		
+		Double remainingAmount = totalAmount - loanDisbursementRef.getTransferAmount();
 		loanApplication.setLoanDisbursement(loanDisbursementRef);
 		
 		loanApplication.setLoanStatus("Disbursed");
